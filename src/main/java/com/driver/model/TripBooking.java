@@ -3,24 +3,51 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-public class TripBooking {
+public class TripBooking{
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tripBookingId;
+
     private String fromLocation;
+
     private String toLocation;
+
     private int distanceInKm;
-    private TripStatus status;
-    private int bill;
+
+    public TripStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TripStatus status) {
+        this.status = status;
+    }
+
+    TripStatus status;
+
+    int bill;
+
     @ManyToOne
     @JoinColumn
-    private Driver driver;
+    Driver driver;
+
+
     @ManyToOne
     @JoinColumn
-    private Customer customer;
+    Customer customer;
 
     public TripBooking() {
+    }
 
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Driver driver, Customer customer) {
+        this.tripBookingId = tripBookingId;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.distanceInKm = distanceInKm;
+        this.status = status;
+        this.bill = bill;
+        this.driver = driver;
+        this.customer = customer;
     }
 
     public int getTripBookingId() {
@@ -55,13 +82,6 @@ public class TripBooking {
         this.distanceInKm = distanceInKm;
     }
 
-    public TripStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TripStatus status) {
-        this.status = status;
-    }
 
     public int getBill() {
         return bill;
@@ -87,14 +107,5 @@ public class TripBooking {
         this.customer = customer;
     }
 
-    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Driver driver, Customer customer) {
-        this.tripBookingId = tripBookingId;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.distanceInKm = distanceInKm;
-        this.status = status;
-        this.bill = bill;
-        this.driver = driver;
-        this.customer = customer;
-    }
+
 }
